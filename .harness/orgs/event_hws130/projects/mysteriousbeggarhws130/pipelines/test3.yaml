@@ -46,6 +46,19 @@ pipeline:
                       java -version
                       ./mvnw --batch-mode --file pom.xml verify package
               - step:
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPushDockerRegistry_2
+                  identifier: BuildAndPushDockerRegistry_2
+                  spec:
+                    connectorRef: dockerhub_devsecops
+                    repo: nikpap/harness-workshop
+                    tags:
+                      - <+codebase.shortCommitSha>
+                      - build-<+pipeline.sequenceId>
+                    caching: true
+                    dockerfile: Dockerfile
+                contextType: Pipeline
+              - step:
                   name: Fortify
                   identifier: Fortify
                   template:
