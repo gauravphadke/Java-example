@@ -35,14 +35,6 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Test
-                  name: Run Tests With Intelligence
-                  identifier: Run_Tests_With_Intelligence
-                  spec:
-                    shell: Sh
-                    command: pip install pytest & cd ./python-tests
-                    intelligenceMode: true
-              - step:
                   type: Run
                   name: Run CI with Maven
                   identifier: Run_CI_with_Maven
