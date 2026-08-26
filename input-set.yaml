@@ -1,0 +1,14 @@
+inputSet:
+  name: PR Number Input Set
+  identifier: PR_Number_Input_Set
+  orgIdentifier: event_hws130
+  projectIdentifier: mysteriousbeggarhws130
+  pipeline:
+    identifier: test3
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
