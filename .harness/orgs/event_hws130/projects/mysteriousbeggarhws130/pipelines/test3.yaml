@@ -1,0 +1,55 @@
+pipeline:
+  name: test-3
+  identifier: test3
+  projectIdentifier: mysteriousbeggarhws130
+  orgIdentifier: event_hws130
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: Gaurav_Private
+        repoName: Java-example
+        build: <+input>
+  stages:
+    - stage:
+        name: Build
+        identifier: Build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          caching:
+            enabled: true
+            override: false
+          buildIntelligence:
+            enabled: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec:
+              size: xxxlarge
+              imageSpec:
+                imageName: ubuntu-latest
+          execution:
+            steps:
+              - step:
+                  type: Test
+                  name: Run Tests With Intelligence
+                  identifier: Run_Tests_With_Intelligence
+                  spec:
+                    shell: Sh
+                    command: pip install pytest & cd ./python-tests
+                    intelligenceMode: true
+              - step:
+                  type: Run
+                  name: Run CI with Maven
+                  identifier: Run_CI_with_Maven
+                  spec:
+                    connectorRef: dockerhub_devsecops
+                    image: maven:3.9.9-eclipse-temurin-17
+                    shell: Sh
+                    command: |-
+                      java -version
+                      mvn clean verify
