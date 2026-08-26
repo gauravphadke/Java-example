@@ -44,7 +44,7 @@ pipeline:
                     shell: Sh
                     command: |-
                       java -version
-                      mvn clean verify
+                      ./mvnw --batch-mode --file pom.xml verify package
               - step:
                   name: Fortify
                   identifier: Fortify
