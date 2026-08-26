@@ -53,3 +53,15 @@ pipeline:
                     command: |-
                       java -version
                       mvn clean verify
+              - step:
+                  name: Fortify
+                  identifier: Fortify
+                  template:
+                    templateRef: fortify
+                    versionLabel: v0.1
+              - step:
+                  name: OWASP
+                  identifier: OWASP
+                  template:
+                    templateRef: owasp
+                    versionLabel: v0.1
