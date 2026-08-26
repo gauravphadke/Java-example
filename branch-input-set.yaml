@@ -1,0 +1,14 @@
+inputSet:
+  name: Branch Input Set
+  identifier: Branch_Input_Set
+  orgIdentifier: event_hws130
+  projectIdentifier: mysteriousbeggarhws130
+  pipeline:
+    identifier: test3
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
