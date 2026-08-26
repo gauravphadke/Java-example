@@ -34,27 +34,32 @@ pipeline:
                 imageName: ubuntu-latest
           execution:
             steps:
-              - step:
-                  type: Run
-                  name: Run CI with Maven
-                  identifier: Run_CI_with_Maven
-                  spec:
-                    connectorRef: dockerhub_devsecops
-                    image: maven:3.9.16-eclipse-temurin-25
-                    shell: Sh
-                    command: |-
-                      java -version
-                      ./mvnw --batch-mode --file pom.xml verify package
-              - step:
-                  type: BuildAndPushDockerRegistry
-                  name: BuildAndPushDockerRegistry_2
-                  identifier: BuildAndPushDockerRegistry_2
-                  spec:
-                    connectorRef: dockerhub_devsecops
-                    repo: nikpap/harness-workshop
-                    tags:
-                      - <+codebase.shortCommitSha>
-                      - build-<+pipeline.sequenceId>
-                    caching: true
-                    dockerfile: Dockerfile
-                contextType: Pipeline
+              - stepGroup:
+                  name: Build And Dockerize
+                  identifier: Build_And_Dockerize
+                  steps:
+                    - parallel:
+                        - step:
+                            type: Run
+                            name: Run CI with Maven
+                            identifier: Run_CI_with_Maven
+                            spec:
+                              connectorRef: dockerhub_devsecops
+                              image: maven:3.9.16-eclipse-temurin-25
+                              shell: Sh
+                              command: |-
+                                java -version
+                                ./mvnw --batch-mode --file pom.xml verify package
+                        - step:
+                            type: BuildAndPushDockerRegistry
+                            name: BuildAndPushDockerRegistry_2
+                            identifier: BuildAndPushDockerRegistry_2
+                            spec:
+                              connectorRef: dockerhub_devsecops
+                              repo: nikpap/harness-workshop
+                              tags:
+                                - <+codebase.shortCommitSha>
+                                - build-<+pipeline.sequenceId>
+                              caching: true
+                              dockerfile: Dockerfile
+                          contextType: Pipeline
