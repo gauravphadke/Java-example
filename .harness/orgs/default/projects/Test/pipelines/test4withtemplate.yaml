@@ -1,0 +1,14 @@
+pipeline:
+  name: test-4-with-template
+  identifier: test4withtemplate
+  tags: {}
+  template:
+    templateRef: HarnessTemplate1
+    versionLabel: "1"
+    templateInputs:
+      properties:
+        ci:
+          codebase:
+            build: <+input>
+  projectIdentifier: Test
+  orgIdentifier: default
