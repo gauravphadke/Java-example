@@ -33,42 +33,21 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Action
-                  name: Java Setup
-                  identifier: Java_Setup
+                  type: Run
+                  name: Launch GitHub Workflow
+                  identifier: Launch_GitHub_Workflow
                   spec:
-                    uses: actions/setup-java@v4
-                  description: Setup Java
-                contextType: Pipeline
-              - stepGroup:
-                  name: Build And Dockerize
-                  identifier: Build_And_Dockerize
-                  steps:
-                    - parallel:
-                        - step:
-                            type: Run
-                            name: Run CI with Maven
-                            identifier: Run_CI_with_Maven
-                            spec:
-                              connectorRef: dockerhub_devsecops
-                              image: maven:3.9.16-eclipse-temurin-25
-                              shell: Sh
-                              command: |-
-                                java -version
-                                ./mvnw --batch-mode --file pom.xml verify package
-                        - step:
-                            type: BuildAndPushDockerRegistry
-                            name: BuildAndPushDockerRegistry_2
-                            identifier: BuildAndPushDockerRegistry_2
-                            spec:
-                              connectorRef: dockerhub_devsecops
-                              repo: gauravphadkep/harness-workshop
-                              tags:
-                                - <+codebase.shortCommitSha>
-                                - build-<+pipeline.sequenceId>
-                              caching: true
-                              dockerfile: Dockerfile
-                          contextType: Pipeline
+                    shell: Sh
+                    command: |-
+                      curl -L \
+                        -X POST \
+                        -H "Accept: application/vnd.github+json" \
+                        -H "Authorization: Bearer $GITHUB_PAT" \
+                        -H "X-GitHub-Api-Version: 2026-03-10" \
+                        https://api.github.com/repos/gauravphadke/Java-example/actions/workflows/harness-triggered.yml/dispatches \
+                        -d '{"ref":"main"}'
+                    envVariables:
+                      GITHUB_PAT: <+secrets.getValue("GitHub_PAT")>
         sendGitStatus:
           enabled: false
           name: ""
