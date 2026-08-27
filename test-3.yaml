@@ -7,7 +7,7 @@ pipeline:
   properties:
     ci:
       codebase:
-        connectorRef: Gaurav_Private
+        connectorRef: Gaurav_Private_GitHub
         repoName: Java-example
         build: <+input>
   stages:
