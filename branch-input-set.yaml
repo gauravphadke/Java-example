@@ -1,8 +1,8 @@
 inputSet:
   name: Branch Input Set
   identifier: Branch_Input_Set
-  orgIdentifier: event_hws130
-  projectIdentifier: mysteriousbeggarhws130
+  projectIdentifier: Test
+  orgIdentifier: default
   pipeline:
     identifier: test3
     properties:
