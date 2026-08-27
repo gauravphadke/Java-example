@@ -562,7 +562,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                         <mainClass>com.miguno.Application</mainClass>
+                         <mainClass>com.miguno.javadockerbuild.App</mainClass>
                 </configuration>
                 <executions>
                     <execution>
