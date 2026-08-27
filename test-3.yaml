@@ -25,13 +25,11 @@ pipeline:
             enabled: true
           platform:
             os: Linux
-            arch: Amd64
+            arch: Arm64
           runtime:
             type: Cloud
             spec:
               size: xxxlarge
-              imageSpec:
-                imageName: ubuntu-latest
           execution:
             steps:
               - stepGroup:
@@ -63,3 +61,6 @@ pipeline:
                               caching: true
                               dockerfile: Dockerfile
                           contextType: Pipeline
+        sendGitStatus:
+          enabled: false
+          name: ""
