@@ -1,8 +1,8 @@
 pipeline:
   name: test-3
   identifier: test3
-  projectIdentifier: mysteriousbeggarhws130
-  orgIdentifier: event_hws130
+  projectIdentifier: test
+  orgIdentifier: default
   tags: {}
   properties:
     ci:
