@@ -9,25 +9,6 @@ pipeline:
       properties:
         ci:
           codebase:
-            connectorRef: Gaurav_Private_GitHub
-            repoName: Java-example
             build: <+input>
-      stages:
-        - stage:
-            identifier: Build_Group
-            type: CI
-            variables:
-              - name: language
-                type: String
-                value: java
-              - name: build_command
-                type: String
-                value: ./mvnw --batch-mode --file pom.xml verify package
-              - name: builder_image
-                type: String
-                value: maven:3.9.16-eclipse-temurin-25
-              - name: dockerfile_path
-                type: String
-                value: Dockerfile
   projectIdentifier: Test
   orgIdentifier: default
