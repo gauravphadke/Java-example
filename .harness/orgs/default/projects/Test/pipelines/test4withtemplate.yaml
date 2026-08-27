@@ -10,5 +10,18 @@ pipeline:
         ci:
           codebase:
             build: <+input>
+        variables:
+          - name: language
+            type: String
+            value: java
+          - name: builder_image
+            type: String
+            value: maven:3.9.16-eclipse-temurin-25
+          - name: build_command
+            type: String
+            value: ./mvnw --batch-mode --file pom.xml verify package
+          - name: dockerfile_path
+            type: String
+            value: Dockerfile
   projectIdentifier: Test
   orgIdentifier: default
