@@ -37,7 +37,7 @@ pipeline:
                   name: Java Setup
                   identifier: Java_Setup
                   spec:
-                    uses: actions/setup-java@v5
+                    uses: actions/setup-java@v4
                   description: Setup Java
                 contextType: Pipeline
               - stepGroup:
