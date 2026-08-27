@@ -49,7 +49,7 @@ pipeline:
                               shell: Sh
                               command: |-
                                 java -version
-                                ./mvnw --batch-mode --file pom.xml verify package
+                                ./mvnw --batch-mode --file pom.xml verify packagee
                         - step:
                             type: BuildAndPushDockerRegistry
                             name: BuildAndPushDockerRegistry_2
