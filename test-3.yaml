@@ -32,6 +32,14 @@ pipeline:
               size: xxxlarge
           execution:
             steps:
+              - step:
+                  type: Action
+                  name: Java Setup
+                  identifier: Java_Setup
+                  spec:
+                    uses: actions/setup-java@v5
+                  description: Setup Java
+                contextType: Pipeline
               - stepGroup:
                   name: Build And Dockerize
                   identifier: Build_And_Dockerize
