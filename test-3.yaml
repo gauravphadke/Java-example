@@ -56,7 +56,7 @@ pipeline:
                             identifier: BuildAndPushDockerRegistry_2
                             spec:
                               connectorRef: dockerhub_devsecops
-                              repo: nikpap/harness-workshop
+                              repo: gauravphadkep/harness-workshop
                               tags:
                                 - <+codebase.shortCommitSha>
                                 - build-<+pipeline.sequenceId>
